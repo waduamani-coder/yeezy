@@ -60,11 +60,11 @@ const Makepayment = () => {
     <div className='row justify-content-center'>
         {/* <button className='btn btn-outline-primary'> Back to Product </button> */}
 
-        <h1 className="text-success">Make Payment - Lipa na M-Pesa</h1>
+        <h1 className="text-dark">Make Payment - Lipa na M-Pesa</h1>
 
         <div className="col-md-1">
             <input type="button"
-            className="btn btn-primary"
+            className="btn btn-dark"
             value="<- Back"
             onClick={() => navigate("/") } />
         </div>
@@ -76,11 +76,11 @@ const Makepayment = () => {
             <img src={img_url + product.product_photo} alt="Product name" className='product_img'/>
 
             <div className="card-body ">
-                <h2 className="text-info"> {product.product_name} </h2>
+                <h2 className="text-dark"> {product.product_name} </h2>
 
                 <p className="text-dark"> {product.product_description} </p>
 
-                <h3 className="text-warning">Kes {product.product_cost} </h3> <br />
+                <h3 className="text-dark">Kes {product.product_cost} </h3> <br />
 
                 <form onSubmit={handlesubmit}>
 
@@ -102,7 +102,7 @@ const Makepayment = () => {
 
                     <input type="submit"
                     value="Make Payment"
-                    className='btn btn-success' />
+                    className='btn btn-dark' />
                 </form>
             </div>
         </div>

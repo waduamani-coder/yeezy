@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const Signup = () => {
   // initialize the hooks
@@ -63,103 +64,133 @@ const Signup = () => {
     }
 
   }
-  return (
-  <div className="container d-flex justify-content-center align-items-center min-vh-100">
-    <div className="card shadow p-4">
+ 
+ 
+ const navigate = useNavigate();
+ return (
+  <>
+    {/* YEEZY NAVBAR */}
+    <nav className="navbar bg-black">
+      <div className="container-fluid d-flex justify-content-between align-items-center">
 
-      <h1 className="mb-3 text-center">Sign Up</h1>
+        {/* EMPTY LEFT */}
+        <div></div>
 
-      {loading && <h5 className="text-warning">{loading}</h5>}
-      {success && <h3 className="text-success">{success}</h3>}
-      {error && <h4 className="text-danger">{error}</h4>}
+        {/* CENTER LOGO */}
+        <h2 className="logo text-white ">
+          <b>YEEZY</b>
+        </h2>
 
-      <form className="form" onSubmit={handleSubmit}>
 
-        {/* Username */}
-        <div className="flex-column">
-          <label>Username</label>
+        {/* RIGHT BUTTONS */}
+        <div className="d-flex gap-2">
+          <button
+            className="btn btn-outline-light btn-sm"
+            onClick={() => navigate("/addproducts")}
+          >
+            Add item
+          </button>
+
+          <button
+            className="btn btn-outline-light btn-sm"
+            onClick={() => navigate("/")}
+          >
+            Home
+          </button>
+
+          <button
+            className="btn btn-outline-light btn-sm"
+            onClick={() => navigate("/signin")}
+          >
+            Sign In
+          </button>
+          <button
+            className="btn btn-outline-light btn-sm"
+            onClick={() => navigate("/signup")}
+          >
+            Sign up
+          </button>
+
+         
         </div>
-        <div className="inputForm">
+      </div>
+    </nav>
+
+    {/* SIGN UP FORM */}
+    <div className="container d-flex justify-content-center align-items-center min-vh-100">
+      <div className="card shadow p-4 col-md-6">
+
+        <h1 className="mb-3 text-center">Sign Up</h1>
+
+        {loading && <h5 className="text-warning">{loading}</h5>}
+        {success && <h3 className="text-success">{success}</h3>}
+        {error && <h4 className="text-danger">{error}</h4>}
+
+        <form onSubmit={handleSubmit}>
+          <label>Username</label>
           <input
             type="text"
-            className="input"
+            className="form-control mb-2"
             placeholder="Enter your Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </div>
 
-        {/* Email */}
-        <div className="flex-column">
           <label>Email</label>
-        </div>
-        <div className="inputForm">
           <input
             type="email"
-            className="input"
+            className="form-control mb-2"
             placeholder="Enter your Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </div>
 
-        {/* Password */}
-        <div className="flex-column">
           <label>Password</label>
-        </div>
-        <div className="inputForm">
           <input
             type="password"
-            className="input"
+            className="form-control mb-2"
             placeholder="Enter your Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
 
-        {/* Phone */}
-        <div className="flex-column">
           <label>Phone</label>
-        </div>
-        <div className="inputForm">
           <input
             type="tel"
-            className="input"
+            className="form-control mb-3"
             placeholder="Enter your Phone Number"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             required
           />
-        </div>
 
-        {/* Remember */}
-        <div className="flex-row">
-          <div>
-            <input type="checkbox" />
-            <label> Remember me </label>
+          <div className="mb-3">
+            <input type="checkbox" />{" "}
+            <label>Remember me</label>
           </div>
-          <span className="span">Forgot password?</span>
-        </div>
 
-        <button type="submit" className="button-submit">
-          Sign Up
-        </button>
+          <button type="submit" className="btn btn-dark w-100">
+            Sign Up
+          </button>
 
-        <p className="p">
-          Already have an account?{" "}
-          <Link to="/signin" className="span">Sign In</Link>
-        </p>
+          <p className="mt-3 text-center">
+            Already have an account?{" "}
+            <span
+              style={{ cursor: "pointer", color: "blue" }}
+              onClick={() => navigate("/signin")}
+            >
+              Sign In
+            </span>
+          </p>
 
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
+  </>
 );
- 
- 
- 
 }
 
 export default Signup;

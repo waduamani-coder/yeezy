@@ -64,7 +64,59 @@ const Signin = () => {
   }
 
 
-  return (
+ return (
+  <>
+    {/* YEEZY NAVBAR */}
+    <nav className="navbar bg-black">
+      <div className="container-fluid">
+        
+        {/* LEFT SPACE */}
+        <div></div>
+
+        {/* CENTER LOGO */}
+        <h2 className="logo text-white ">
+          <b>YEEZY</b>
+        </h2>
+
+        {/* RIGHT BUTTONS */}
+        <div className="d-flex gap-2">
+          <button
+            className="btn btn-outline-light btn-sm"
+            onClick={() => navigate("/addproducts")}
+          >
+            Add item
+          </button>
+
+           <button
+            className="btn btn-outline-light btn-sm"
+            onClick={() => navigate("/")}
+          >
+            Home
+          </button>
+
+
+         
+
+          <button
+            className="btn btn-outline-light btn-sm"
+            onClick={() => navigate("/signin")}
+          >
+            Sign In
+          </button>
+
+          <button
+            className="btn btn-outline-light btn-sm"
+            onClick={() => navigate("/signup")}
+          >
+            Sign up
+          </button>
+
+          
+        </div>
+      </div>
+    </nav>
+
+    {/* SIGN IN FORM */}
     <div className="row justify-content-center mt-4">
       <div className="col-md-6 card shadow p-4">
         <h1>Sign In</h1>
@@ -74,33 +126,37 @@ const Signin = () => {
         <h4 className="text-danger">{error}</h4>
 
         <form onSubmit={handlesubmit}>
-          <input type="email" placeholder='Enter the email address here..'
+          <input
+            type="email"
+            placeholder="Enter the email address here.."
             className="form-control"
             required
             value={email}
-            onChange={(e) => setEmail(e.target.value)} /> <br />
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <br />
 
-          {/* {email} */}
-
-          <input type="password"
+          <input
+            type="password"
             placeholder="Enter the password here"
             className="form-control"
             required
             value={password}
-            onChange={(e) => setPassword(e.target.value)} /> <br />
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <br />
 
-          {/* {password} */}
-
-          <input type="submit"
+          <input
+            type="submit"
             value="Signin"
-            className="btn btn-dark" /> <br /><br />
-
-            
-        </form>
-
+            className="btn btn-dark w-100"
+          />
+          <br /><br />
+        </form> <br />
       </div>
-    </div>
-  )
+    </div> <br />
+  </>
+);
 }
 
 export default Signin;

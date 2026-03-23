@@ -3,6 +3,7 @@ import Loader from './Loader';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
 const Getproducts = () => {
   
 
@@ -55,40 +56,208 @@ const Getproducts = () => {
 
 
 
-  return (
-    <div className='row'>
+ return (
+  <>
+    {/* YEEZY NAVBAR WITH BUTTONS */}
+    <nav className="navbar bg-black">
+      <div className="container-fluid">
+        
+        {/* LEFT SPACE (empty for balance) */}
+        <div></div>
+
+        {/* CENTER LOGO */}
+        <h2 className="logo text-white ">
+          <b>YEEZY</b>
+        </h2>
+
+        {/* RIGHT BUTTONS */}
+        <div className="d-flex gap-2">
+          <button
+            className="btn btn-outline-light btn-sm"
+            onClick={() => navigate("/addproducts")}
+          >
+            Add Item
+          </button>
+           <button
+            className="btn btn-outline-light btn-sm"
+            onClick={() => navigate("/ ")}
+          >
+            Home
+          </button>
+
+          
+
+          <button
+            className="btn btn-outline-light btn-sm"
+            onClick={() => navigate("/signin")}
+          >
+            Sign In
+          </button>
+
+          <button
+            className="btn btn-outline-light btn-sm"
+            onClick={() => navigate("/signup")}
+          >
+            Sign up
+          </button>
+
+         
+        </div>
+      </div>
+    </nav>
+
+    <>
+    <section>
+      <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
+
+        {/* INDICATORS */}
+        <div className="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="0"
+            className="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
+        </div>
+
+        {/* SLIDES */}
+        <div className="carousel-inner">
+
+          {/* SLIDE 1 */}
+          <div className="carousel-item active">
+            <img
+              src="images/yeezy1.jpg"
+              className="d-block w-100"
+              alt="yeezy"
+              style={{ height: "500px", objectFit: "cover" }}
+            />
+
+            <div className="carousel-caption d-none d-md-block">
+              <h5 className="text-dark">Welcome to Yeezy</h5>
+              <p className="text-dark">Where creativity meets fashion</p>
+            </div>
+          </div>
+
+          {/* SLIDE 2 */}
+          <div className="carousel-item">
+            <img
+              src="images/yeezy2.jpg"
+              className="d-block w-100"
+              alt="yeezy2"
+              style={{ height: "500px", objectFit: "cover" }}
+            />
+
+            <div className="carousel-caption d-none d-md-block">
+              <h5>Authentic clothing</h5>
+              <p>Designed by Kanye West</p>
+            </div>
+          </div>
+
+          {/* SLIDE 3 */}
+          <div className="carousel-item">
+            <img
+              src="images/yeezy3.jpg"
+              className="d-block w-100"
+              alt="yeezy3"
+              style={{ height: "500px", objectFit: "cover" }}
+            />
+
+            <div className="carousel-caption d-none d-md-block">
+              <h5 className="text-dark">Where originality begins</h5>
+              <p className="text-dark">
+                Materials obtained from nature such as bamboo
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        {/* CONTROLS */}
+        <button
+          className="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="prev"
+        >
+          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+
+        <button
+          className="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="next"
+        >
+          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Next</span>
+        </button>
+
+      </div>
+    </section>
+    </>
+
+    {/* PRODUCTS SECTION */}
+    <div className='row mt-3'>
       <h3 className='text-dark'>Available items</h3>
+
       {loading && <Loader />}
       <h4 className='text-danger'>{error}</h4>
 
-      {/* map the products fetched from the API to the user interface */}
-
       {products.map((product) => (
-        <div className='col-md-3 justify-content-center mb-3'>
-        <div className="card shadow">
-          <img src={img_url + product.product_photo}
-           alt="product name" 
-           className='product_img mt-3'/>
+        <div
+          className='col-md-3 justify-content-center mb-3'
+          key={product.id}
+        >
+          <div className="card shadow">
+            <img
+              src={img_url + product.product_photo}
+              alt="product name"
+              className='product_img mt-3'
+            />
 
-          <div className="card-body">
-            <h5 className='text-dark'>{product.product_name}</h5>
+            <div className="card-body">
+              <h5 className='text-dark'>{product.product_name}</h5>
 
-            <p className="text-dark">{product.product_description.slice(0, 70)}...</p>
+              <p className="text-dark">
+                {product.product_description.slice(0, 70)}...
+              </p>
 
-            <h4 className="text-dark">Kes {product.product_cost}</h4>
+              <h4 className="text-dark">
+                Kes {product.product_cost}
+              </h4>
 
-            <button className="btn btn-outline-dark" onClick={() => navigate("/makepayment", {state: {product} })}>Purchase Now</button>
+              <button
+                className="btn btn-outline-dark"
+                onClick={() =>
+                  navigate("/makepayment", { state: { product } })
+                }
+              >
+                Purchase Now
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      ) )}
-
-      
-
+      ))}
     </div>
-    
-  )
-  
+  </>
+);
 }
 
 

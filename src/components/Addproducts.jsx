@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Loader from './Loader';
 import axios from 'axios';
+import Footer from './Footer';
 
 const Addproducts = () => {
 
@@ -67,66 +68,116 @@ const Addproducts = () => {
 
   }
   return (
+  <>
+    {/* YEEZY NAVBAR */}
+    <nav className="navbar bg-black">
+      <div className="container-fluid d-flex justify-content-between align-items-center">
+
+        {/* LEFT SPACE */}
+        <div><h2 className="logo text-white ">
+          <b>YEEZY</b>
+        </h2>
+</div>
+
+        {/* CENTER LOGO */}
+        
+        {/* RIGHT BUTTONS */}
+        <div className="d-flex gap-2">
+          <button
+            className="btn btn-outline-light btn-sm"
+            onClick={() => window.location.href = "/addproducts"}
+          >
+            Add item
+          </button>
+
+          <button
+            className="btn btn-outline-light btn-sm"
+            onClick={() => window.location.href = "/"}
+          >
+            Home
+          </button>
+
+          <button
+            className="btn btn-outline-light btn-sm"
+            onClick={() => window.location.href = "/signin"}
+          >
+            Sign In
+          </button>
+
+          
+          <button
+            className="btn btn-outline-light btn-sm"
+            onClick={() => window.location.href = "/signup"}
+          >
+            Sign up
+          </button>
+
+         
+        </div>
+      </div>
+    </nav>
+
+    {/* ADD PRODUCT FORM */}
     <div className="row justify-content-center mt-4">
       <div className="col-md-6 p-4 card shadow">
-        <h3>Welcome to Add item</h3>
+        <h3>Welcome to Add Item</h3>
 
-        {/* bind the loading hook */}
-        {loading && <Loader /> }
+        {loading && <Loader />}
 
-         <h3 className="text-success">{success}</h3>
-      <h4 className="text-warning">{error}</h4>
-
+        <h3 className="text-success">{success}</h3>
+        <h4 className="text-warning">{error}</h4>
 
         <form onSubmit={handlSubmit}>
-          <input type="text"
-          placeholder='Enter the item name'
-          className='form-control'
-          required
-          value={product_name
-          } 
-          onChange= { (e) => setProductName(e.target.value)}/> <br />
+          <input
+            type="text"
+            placeholder="Enter the item name"
+            className="form-control"
+            required
+            value={product_name}
+            onChange={(e) => setProductName(e.target.value)}
+          />
+          <br />
 
-          {/* {product_name} */}
+          <input
+            type="text"
+            placeholder="Enter the item Description"
+            className="form-control"
+            required
+            value={product_description}
+            onChange={(e) => setProductDescription(e.target.value)}
+          />
+          <br />
 
-          <input type="text" 
-          placeholder='Enter the item Description'
-          className='form-control'
-          required
-          value={product_description}
-          onChange= { (e) => setProductDescription(e.target.value)}/> <br />
+          <input
+            type="number"
+            placeholder="Enter The price of the item"
+            className="form-control"
+            required
+            value={product_cost}
+            onChange={(e) => setProductcost(e.target.value)}
+          />
+          <br />
 
-          {/* {product_description} */}
+          <label>Item Photo</label>
+          <input
+            type="file"
+            className="form-control"
+            required
+            accept="image/*"
+            onChange={(e) => setProductphoto(e.target.files[0])}
+          />
+          <br />
 
-          <input type="number"
-          placeholder='Enter The price of the item'
-          className='form-control'
-          required
-          value={product_cost}
-          onChange={(e) => setProductcost(e.target.value)} /> <br />
-
-          <label>item Photo</label>
-          <input type="file"
-          className='form-control'
-          required 
-          accept="image/*"
-          onChange={(e) => setProductphoto(e.target.files[0])}
-          
-          /> <br />
-
-          
-          
-
-          <input type="submit"
-          value="Add item"
-          className='btn btn-outline-primary' />
-
-
+          <input
+            type="submit"
+            value="Add Item"
+            className="btn btn-outline-dark w-100"
+          />
         </form>
       </div>
-     
     </div>
-  )
+  </>
+);
 }
 
 export default Addproducts;

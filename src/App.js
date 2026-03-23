@@ -8,6 +8,7 @@ import Addproducts from './components/Addproducts';
 import Getproducts from './components/Getproducts';
 import Makepayment from './components/Makepayment';
 import Notfound from './components/Notfound';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -25,9 +26,11 @@ function App() {
           <Route path = '/addproducts' element={<Addproducts />} />
           <Route path ='/makepayment' element={<Makepayment />} />
          <Route path= '*' element={<Notfound />} />
-
+          <Route path ='/footer' element={<Footer />} />
+         
          
       </Routes>
+      <Footer />
     </div>
    </Router>
   );
