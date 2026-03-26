@@ -16,7 +16,19 @@ function App() {
    <Router>
      <div className="App">
       <header className="App-header">
-        <h2>Welcome to yeezy clothing</h2>
+        <h2 className="text-dark"
+  style={{
+    fontFamily: "Helvetica, Arial, sans-serif",
+    fontWeight: "600",
+    letterSpacing: "3px",
+    textTransform: "uppercase",
+    textAlign: "center",
+    marginTop: "20px"
+  }}>
+  
+
+
+Welcome to yeezy clothing</h2>
         
       </header>
       <Routes>

@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
+
+
 const Getproducts = () => {
   
 
@@ -149,7 +151,7 @@ const Getproducts = () => {
             />
 
             <div className="carousel-caption d-none d-md-block">
-              <h5 className="text-dark">Welcome to Yeezy</h5>
+              <h5 className="text-dark ">Welcome to Yeezy</h5>
               <p className="text-dark">Where creativity meets fashion</p>
             </div>
           </div>
