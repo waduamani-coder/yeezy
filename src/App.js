@@ -24,6 +24,8 @@ function App() {
     textTransform: "uppercase",
     textAlign: "center",
     marginTop: "20px"
+
+    
   }}>
   
 
@@ -39,6 +41,7 @@ Welcome to yeezy clothing</h2>
           <Route path ='/makepayment' element={<Makepayment />} />
          <Route path= '*' element={<Notfound />} />
           <Route path ='/footer' element={<Footer />} />
+           
          
          
       </Routes>
