@@ -2,16 +2,25 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
+// Axios sends login data to backend
+// useState stores users input and status
+// useNavigate redirects user after login
+
 const Signin = () => {
 
   // Define the two hooks for capturing/storing the users input
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // This stores what the user types which is email and password it is called a controlled form
 
   // Declare the three additional hooks
   const [loading, setLoading] = useState("");
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+
+  // Loading shows login processing message
+  // Success shows success message
+  // Shows login failure message
 
   // below we have the useNavigate hook to redirect us to another page on successful login/signin
   const navigate = useNavigate()
@@ -33,8 +42,10 @@ const Signin = () => {
       // insert/append the email and the password on the formData created.
       formdata.append("email", email);
       formdata.append("password", password)
+      // This code sends user login details to backend
 
       const response = await axios.post("https://waduamani.alwaysdata.net/api/signin", formdata);
+      // This sends login request to backend and the backend checks if the user exists
 
       // set the loading hook back to default
       setLoading("");

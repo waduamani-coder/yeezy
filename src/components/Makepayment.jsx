@@ -2,25 +2,38 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import Loader from './Loader';
+// Axios sends payment request to backend which is the mpesa api
+// useState stores user input and status
+// useLocation receives product data from previous page
+// useNavigate moves between pages
+// Loader shows loading animation during payment
 
 const Makepayment = () => {
 
     // destructure the details passed from the Getproducts component
     // The useLoacation hook allows us to get/destructure the properties passed from the previous component.
     const {product} = useLocation().state || {}
+    // This gets the selected product from getproduct.jsx
 
     // declare the navigate hook
     const navigate = useNavigate()
+    // Used to go back to homepage or other pages
 
     // console.log("The details passed from getproducts are: ",product)
     // below we specify the image base url
     const img_url = "https://waduamani.alwaysdata.net/static/images/"
+    // It combines with the product image name to display image
 
     // initialize hooks to manage the state of your application
     const [number, setNumber] = useState("")
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
+    // Number stores user phone number
+    // loading shows payment processing state
+    // Success shows succesful payment message
+    // Error shows error message if payment fails
+
 
     // create a function that will handle the submit action
     const handlesubmit = async (e) =>{
@@ -29,6 +42,7 @@ const Makepayment = () => {
 
         // update the loading hook
         setLoading(true)
+        // This starts the loading
 
         try{
             // create a form data object
@@ -37,8 +51,10 @@ const Makepayment = () => {
             // append the data to the form data
             formdata.append("phone", number)
             formdata.append("amount", product.product_cost)
+            // This sends the phone number and the product price
 
             const response = await axios.post("https://waduamani.alwaysdata.net/api/mpesa_payment", formdata)
+            // This code connects to backend payment system and triggers mpesa stk push request
 
             // set loading back to default
             setLoading(false)

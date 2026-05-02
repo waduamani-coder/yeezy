@@ -2,6 +2,12 @@ import React, { useEffect, useState } from 'react'
 import Loader from './Loader';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+// React is the core library for building the user interface
+// Usestate stores data
+// Useeffect runs code automatically when page loads
+// Loader shows loading animation
+// Axios is used to load the backend api
+// UseNavigate helps move between pages
 
 
 
@@ -14,12 +20,18 @@ const Getproducts = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // products stores items from the database
+  // loading shows if data is being fetched
+  // error stores error message if api fails
+
   // declare the navigate hook
 
   const navigate = useNavigate()
+  // This code is used to move between pages
 
   // below we specify the image base url
   const img_url = "https://waduamani.alwaysdata.net/static/images/"
+  // This is the base link for product images
 
   // create a function to help you fetch the products from your API
   const fetchProducts = async() =>{
@@ -28,12 +40,14 @@ const Getproducts = () => {
       setLoading(true);
       // interact with your endpoint for fetching the products
       const response = await axios.get("https://waduamani.alwaysdata.net/api/get_products")
+      // This code sends request to backend api using axios
 
       // update the products with the response given from the API
       setProducts(response.data)
 
       // Set the loading hook back to default
       setLoading(false)
+      // It is usually given true before the request
 
     }
     catch(error){
@@ -49,9 +63,11 @@ const Getproducts = () => {
   }
 
   // we shall use the useEffect hook. This hook enables us to automatically re-render new features incase of any changes.
+
   useEffect(() => {
     fetchProducts()
   }, [])
+  // This code automaticaly fetches products immediately
 
   // console.log(products)
 

@@ -3,6 +3,11 @@ import Loader from './Loader';
 import axios from 'axios';
 import Footer from './Footer';
 
+// React and useState handles dynamic form data
+// Shows loading animation while uploading
+// Sends data to backend api
+
+
 const Addproducts = () => {
 
   // introduce the hooks
@@ -10,11 +15,16 @@ const Addproducts = () => {
   const [product_description,setProductDescription] =useState("");
   const [product_cost, setProductcost] = useState("");
   const [product_photo, setProductphoto] = useState("");
+  // This codes stores what the user types in the form it is called a control form
 
   // declare the additional hook to manage the state of the application
   const [loading,setLoading] = useState(false);
   const [success,setSuccess] = useState("");
   const [error, setError] = useState("");
+
+  // Loading shows while sending data to backend
+  // Success merssage when product is added
+  // Error message if something fails
 
   // create a function that will handle the submit action
   const handlSubmit = async (e) =>{
@@ -23,24 +33,29 @@ const Addproducts = () => {
 
     // setLoading hook with a message (activate it)
     setLoading(true)
+    // This starts the loading
     try{
       // create a form data
       const formdata = new FormData()
+      // The formdata is used when sending text and image files to backend
 
       // append the details to the form data created
       formdata.append("product_name", product_name);
       formdata.append("product_description", product_description);
       formdata.append("product_cost", product_cost);
       formdata.append("product_photo", product_photo);
+      // This sends all product details to backend
 
       // interact with axios to help you use the method post
       const response = await axios.post("https://waduamani.alwaysdata.net/api/add_product", formdata)
+      // This sends the product to backend database using the post method
 
       // set the loading hook back to default
       setLoading(false)
 
       // update the success hook with a message
       setSuccess(response.data.message)
+      // Shows success message from backend
 
       // clearing the hooks (setting them back to default/empty)
       setProductName("");
@@ -49,11 +64,13 @@ const Addproducts = () => {
       setProductphoto("");
 
       e.target.reset()
+      // Clears form after the succesful submission
 
       
        setTimeout(() => {
     setSuccess("");
   }, 5000);
+  // This is a timeout that will hide the success message after 5 seconds
 
 
     }
@@ -63,6 +80,7 @@ const Addproducts = () => {
 
       // update the setError with a message
       setError(error.message)
+      // This will show error if the api fails
 
     }
 
@@ -173,6 +191,7 @@ const Addproducts = () => {
             value="Add Item"
             className="btn btn-outline-dark w-100"
           />
+          {/* This code sends form data to backend when clicked */}
         </form>
       </div>
     </div>

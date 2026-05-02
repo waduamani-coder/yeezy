@@ -1,6 +1,10 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+// Axios sends registration data to backend
+// useState stores form input values
+// useNavigate redirects user after signup
+
 
 
 const Signup = () => {
@@ -9,11 +13,15 @@ const Signup = () => {
   const [email,setEmail] = useState("");
   const [password, setPassword] = useState("");
   const[phone,setPhone] = useState("");
+  // This stores what the user types it is a controlled form
 
   // Define the three states and the application will move to
   const[loading, setLoading] = useState("");
   const[success, setSuccess] = useState("");
   const[error, setError] = useState("");
+  // loading shows the registration process message
+  // success shows successful signup message
+  // error shows failure message
 
   // Below is a function that will handle the submit action
   const handleSubmit = async(e) =>{
@@ -32,9 +40,11 @@ const Signup = () => {
       formdata.append("email",email);
       formdata.append("password",password);
       formdata.append("phone",phone);
+      // This sends user registration details to backend api
 
       // by use of axios, we can access be the method post
       const response =await axios.post("https://waduamani.alwaysdata.net/api/signup", formdata)
+      // Sends signup requests to backend server and the backend creates new user account
 
       // set back the loading to default
       setLoading("");
@@ -47,11 +57,13 @@ const Signup = () => {
       setEmail("");
       setPassword("");
       setPhone("");
+      // This resets form after successful registration
 
       
        setTimeout(() => {
     setSuccess("");
   }, 5000);
+  // This is a timeout where the message dissapears after 5 seconds
 
     }
     catch(error){
@@ -60,6 +72,7 @@ const Signup = () => {
 
       // update the error hook with the message given back from the response
       setError(error.message)
+      // This shows error if signup fails
 
     }
 
@@ -67,6 +80,7 @@ const Signup = () => {
  
  
  const navigate = useNavigate();
+//  Used to move between pages
  return (
   <>
     {/* YEEZY NAVBAR */}
