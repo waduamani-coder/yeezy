@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import Loader from './Loader';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import SearchBar from "./SearchBar";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 // React is the core library for building the user interface
 // Usestate stores data
 // Useeffect runs code automatically when page loads
@@ -19,6 +22,7 @@ const Getproducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  
 
   // products stores items from the database
   // loading shows if data is being fetched
@@ -71,6 +75,13 @@ const Getproducts = () => {
 
   // console.log(products)
 
+  const [search, setSearch] = useState("");
+  const filteredProducts = products.filter((product) =>
+  product.product_name.toLowerCase().includes(search.toLowerCase())
+);
+const { addToCart } = useContext(CartContext);
+const [addedItems, setAddedItems] = useState([]);
+
 
 
 
@@ -118,6 +129,11 @@ const Getproducts = () => {
           >
             Sign up
           </button>
+          <button
+           className="btn btn-outline-light btn-sm"
+            onClick={() => navigate("/cart")}>
+  Cart
+</button>
 
          
         </div>
@@ -231,6 +247,8 @@ const Getproducts = () => {
     </section>
     </>
 
+    <SearchBar search={search} setSearch={setSearch} />
+
     {/* PRODUCTS SECTION */}
     <div className='row mt-3'>
       <h3 className='text-dark'>Available items</h3>
@@ -238,7 +256,7 @@ const Getproducts = () => {
       {loading && <Loader />}
       <h4 className='text-danger'>{error}</h4>
 
-      {products.map((product) => (
+      {filteredProducts.map((product) => (
         <div
           className='col-md-3 justify-content-center mb-3'
           key={product.id}
@@ -260,6 +278,18 @@ const Getproducts = () => {
               <h4 className="text-dark">
                 Kes {product.product_cost}
               </h4>
+
+              <button
+  className="btn btn-outline-dark"
+  onClick={() => {
+    addToCart(product);
+    setAddedItems((prev) => [...prev, product.id]);
+  }}
+>
+  {addedItems.includes(product.id)
+    ? "Added to Cart ✅"
+    : "Add to Cart 🛒"}
+</button>
 
               <button
                 className="btn btn-outline-dark"
