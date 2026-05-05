@@ -75,12 +75,20 @@ const Getproducts = () => {
 
   // console.log(products)
 
+
+
   const [search, setSearch] = useState("");
   const filteredProducts = products.filter((product) =>
   product.product_name.toLowerCase().includes(search.toLowerCase())
 );
-const { addToCart } = useContext(CartContext);
+const { addToCart,cart } = useContext(CartContext);
 const [addedItems, setAddedItems] = useState([]);
+const getQty = (product_id) => {
+  const item = cart.find(
+    (p) => p.product_id === product_id
+  );
+  return item ? item.quantity : 0;
+};
 
 
 
@@ -257,6 +265,7 @@ const [addedItems, setAddedItems] = useState([]);
       <h4 className='text-danger'>{error}</h4>
 
       {filteredProducts.map((product) => (
+        
         <div
           className='col-md-3 justify-content-center mb-3'
           key={product.id}
@@ -278,17 +287,20 @@ const [addedItems, setAddedItems] = useState([]);
               <h4 className="text-dark">
                 Kes {product.product_cost}
               </h4>
+            
 
               <button
   className="btn btn-outline-dark"
   onClick={() => {
     addToCart(product);
-    setAddedItems((prev) => [...prev, product.id]);
+    setAddedItems((prev) => [...prev, product.product_id]);
   }}
 >
-  {addedItems.includes(product.id)
-    ? "Added to Cart ✅"
+   {getQty(product.product_id) > 0
+    ? `Added (${getQty(product.product_id)})`
     : "Add to Cart 🛒"}
+   
+  
 </button>
 
               <button
