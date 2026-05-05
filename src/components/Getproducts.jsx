@@ -22,6 +22,8 @@ const Getproducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [input, setInput] = useState("");
+const [messages, setMessages] = useState([]);
   
 
   // products stores items from the database
@@ -89,6 +91,26 @@ const getQty = (product_id) => {
   );
   return item ? item.quantity : 0;
 };
+const sendMessage = async () => {
+  if (!input) return;
+
+  try {
+    const res = await axios.post("http://localhost:5000/chat", {
+      message: input,
+    });
+
+    setMessages([
+      ...messages,
+      { sender: "user", text: input },
+      { sender: "bot", text: res.data.reply },
+    ]);
+
+    setInput("");
+  } catch (error) {
+    console.log(error);
+  }
+};
+const [chatOpen, setChatOpen] = useState(false);
 
 
 
@@ -316,6 +338,134 @@ const getQty = (product_id) => {
         </div>
       ))}
     </div>
+    {chatOpen && (
+  <div style={{
+    position: "fixed",
+    bottom: 90,
+    right: 20,
+    width: 340,
+    height: 450,
+    zIndex: 999999,
+    fontFamily: "Arial, sans-serif",
+    display: "flex",
+    flexDirection: "column",
+    borderRadius: 16,
+    overflow: "hidden",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.3)"
+  }}>
+
+    {/* HEADER */}
+    <div style={{
+      background: "#0f0f0f",
+      color: "#fff",
+      padding: "12px 14px",
+      fontWeight: "bold",
+      fontSize: 14,
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center"
+    }}>
+      <span>🛍 YZY Assistant</span>
+      <span style={{ fontSize: 11, opacity: 0.6 }}>online</span>
+    </div>
+
+    {/* CHAT BODY */}
+    <div style={{
+      flex: 1,
+      background: "#f7f7f7",
+      padding: 10,
+      overflowY: "auto"
+    }}>
+      {messages.length === 0 && (
+        <p style={{ fontSize: 12, color: "#888" }}>
+          Ask me about Yeezy outfits, prices, or recommendations 👟
+        </p>
+      )}
+
+      {messages.map((msg, i) => (
+        <div key={i} style={{
+          display: "flex",
+          justifyContent: msg.sender === "user" ? "flex-end" : "flex-start",
+          marginBottom: 8
+        }}>
+          <div style={{
+            maxWidth: "75%",
+            padding: "8px 12px",
+            borderRadius: 14,
+            fontSize: 13,
+            background: msg.sender === "user" ? "#111" : "#fff",
+            color: msg.sender === "user" ? "#fff" : "#111",
+            border: msg.sender === "user" ? "none" : "1px solid #ddd",
+            boxShadow: "0 2px 6px rgba(0,0,0,0.05)"
+          }}>
+            {msg.text}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* INPUT AREA */}
+    <div style={{
+      display: "flex",
+      borderTop: "1px solid #ddd",
+      background: "#fff"
+    }}>
+      <input
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Ask about clothes..."
+        style={{
+          flex: 1,
+          border: "none",
+          padding: 12,
+          outline: "none",
+          fontSize: 13
+        }}
+      />
+
+      <button
+        onClick={sendMessage}
+        style={{
+          background: "#111",
+          color: "white",
+          border: "none",
+          padding: "0 16px",
+          cursor: "pointer",
+          fontWeight: "bold"
+        }}
+      >
+        ➤
+      </button>
+    </div>
+
+  </div>
+)}
+    {/* CHAT ICON */}
+{/* CHAT ICON */}
+<div
+  onClick={() => setChatOpen(!chatOpen)}
+  style={{
+    position: "fixed",
+    bottom: "20px",
+    right: "20px",
+    width: "60px",
+    height: "60px",
+    borderRadius: "50%",
+    backgroundColor: "#111",
+    color: "white",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: "22px",
+    cursor: "pointer",
+    zIndex: 999999,
+    boxShadow: "0 6px 16px rgba(0,0,0,0.25)",
+    transition: "all 0.3s ease",
+  }}
+  className="chat-icon"
+>
+  💬
+</div>
   </>
 );
 }
