@@ -95,7 +95,7 @@ const sendMessage = async () => {
   if (!input) return;
 
   try {
-    const res = await axios.post("https://yeezybot.onrender.com",{
+    const res = await axios.post("https://yeezybot.onrender.com/chat", {
       message: input,
     });
 
