@@ -99,8 +99,8 @@ const sendMessage = async () => {
       message: input,
     });
 
-    setMessages([
-      ...messages,
+    setMessages(prev => [
+      ...prev,
       { sender: "user", text: input },
       { sender: "bot", text: res.data.reply },
     ]);
